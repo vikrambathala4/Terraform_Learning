@@ -1,9 +1,9 @@
 name: Sync Private Repo with Public Repo
 
 on:
-  # Triggers the workflow at regular intervals (e.g., every 6 hours)
+  # Trigger the workflow at regular intervals (e.g., every 12 hours)
   schedule:
-    - cron: '0 */6 * * *'  # This runs the action every 6 hours
+    - cron: '0 */12 * * *'  # This runs the action every 12 hours
 
   # Allows manual triggering of the workflow
   workflow_dispatch:
@@ -13,17 +13,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout your private repository (this repo)
       - name: Checkout Private Repository
         uses: actions/checkout@v3
-        with:
-          repository: yourusername/private-repo
-          token: ${{ secrets.GITHUB_TOKEN }}
 
+      # Step 2: Add the public repository (Repo 1) as upstream and fetch its changes
       - name: Add Public Repository as Upstream
         run: |
-          git remote add upstream https://github.com/twbs/bootstrap.git
+          git remote add upstream https://github.com/twbs/bootstrap.git  # Replace with your public repo
           git fetch upstream
 
+      # Step 3: Merge the changes from the public repo into your private repo
       - name: Merge Public Repo Changes
         run: |
           git checkout main
