@@ -21,7 +21,7 @@ jobs:
 
       - name: Add Public Repository as Upstream
         run: |
-          git remote add upstream https://github.com/otherusername/repo-1.git
+          git remote add upstream https://github.com/twbs/bootstrap.git
           git fetch upstream
 
       - name: Merge Public Repo Changes
